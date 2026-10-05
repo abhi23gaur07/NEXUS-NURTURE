@@ -66,6 +66,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             IoT Telemetry
           </button>
           <button
+            onClick={() => onSelectSection('sleep-biometrics')}
+            className={`transition-colors whitespace-nowrap ${
+              activeSection === 'sleep-biometrics' ? 'text-emerald-700 font-semibold' : 'hover:text-slate-900'
+            }`}
+          >
+            Sleep mmWave
+          </button>
+          <button
             onClick={onOpenArchitecture}
             className="hover:text-slate-900 transition-colors whitespace-nowrap"
           >

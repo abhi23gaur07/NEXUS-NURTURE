@@ -16,6 +16,7 @@ import { EdgePayloadConsole } from './components/EdgePayloadConsole';
 import { VoiceCommandAssistant } from './components/VoiceCommandAssistant';
 import { SiriIntegrationModal } from './components/SiriIntegrationModal';
 import { NexusEntranceExperience } from './components/NexusEntranceExperience';
+import { SleepCycleBiometricsDashboard } from './components/SleepCycleBiometricsDashboard';
 import { 
   Cpu, 
   Sparkles, 
@@ -625,6 +626,14 @@ export default function App() {
             <TelemetryGauges room={currentRoom} history={telemetryHistory} />
           </section>
         </div>
+
+        {/* SECTION 2.5: MMWAVE BIOMETRIC SLEEP CYCLE DETECTOR & THERMAL ACTUATION */}
+        <SleepCycleBiometricsDashboard
+          room={rooms.find(r => r.id === 'bedroom') || currentRoom}
+          onUpdateACTemp={(temp) => handleUpdateRoomTemp('bedroom', temp)}
+          onUpdateACMode={(mode) => handleUpdateRoomMode('bedroom', mode)}
+          onUpdateServoAngle={(angle) => handleUpdateRoomServoAngle('bedroom', angle)}
+        />
 
         {/* SECTION 3: ESP-NOW WIRELESS MESH NETWORK TOPOLOGY & TRIGGER SIMULATOR */}
         <section id="mesh" className="space-y-3">
