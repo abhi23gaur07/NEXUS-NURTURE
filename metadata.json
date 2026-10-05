@@ -1,0 +1,6 @@
+{
+  "name": "Nexus Nurture - Smart Home Edge IoT Platform",
+  "description": "Next-generation IoT smart living platform featuring 3D smart home visualization, real-time temperature and humidity telemetry, spatial mmWave occupancy sensing, and instant edge smart AC automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
