@@ -15,6 +15,7 @@ import { NodeMeshViewer } from './components/NodeMeshViewer';
 import { EdgePayloadConsole } from './components/EdgePayloadConsole';
 import { VoiceCommandAssistant } from './components/VoiceCommandAssistant';
 import { SiriIntegrationModal } from './components/SiriIntegrationModal';
+import { NexusEntranceExperience } from './components/NexusEntranceExperience';
 import { 
   Cpu, 
   Sparkles, 
@@ -173,7 +174,8 @@ export default function App() {
     authenticated: false,
   });
 
-  // Modal dialog toggles
+  // Modal and Experience dialog toggles
+  const [showStartingInterface, setShowStartingInterface] = useState<boolean>(true);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isArchOpen, setIsArchOpen] = useState(false);
   const [isSiriOpen, setIsSiriOpen] = useState(false);
@@ -479,11 +481,20 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-emerald-500 selection:text-white">
+      {/* 0. Fullscreen 3D Starting Interface (Nexus Preloader Experience) */}
+      {showStartingInterface && (
+        <NexusEntranceExperience
+          isOpen={showStartingInterface}
+          onEnter={() => setShowStartingInterface(false)}
+        />
+      )}
+
       {/* 1. Header Navigation Bar */}
       <Navbar
         currentUser={currentUser}
         onOpenLogin={() => setIsLoginOpen(true)}
         onOpenArchitecture={() => setIsArchOpen(true)}
+        onOpenEntrance={() => setShowStartingInterface(true)}
         activeSection={activeSection}
         onSelectSection={scrollToSection}
         voiceControlSlot={

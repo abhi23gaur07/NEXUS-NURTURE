@@ -1,11 +1,12 @@
 import React from 'react';
 import { UserProfile } from '../types/iot';
-import { ShieldCheck, User, Radio, Cpu, LogIn, SlidersHorizontal } from 'lucide-react';
+import { ShieldCheck, User, Radio, Cpu, LogIn, SlidersHorizontal, Compass } from 'lucide-react';
 
 interface NavbarProps {
   currentUser: UserProfile;
   onOpenLogin: () => void;
   onOpenArchitecture: () => void;
+  onOpenEntrance?: () => void;
   activeSection: string;
   onSelectSection: (section: string) => void;
   voiceControlSlot?: React.ReactNode;
@@ -15,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentUser,
   onOpenLogin,
   onOpenArchitecture,
+  onOpenEntrance,
   activeSection,
   onSelectSection,
   voiceControlSlot,
@@ -88,6 +90,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="font-mono text-slate-800 font-medium">Edge: 3.4ms</span>
           </div>
+
+          {/* 3D Starting Interface Portal Trigger */}
+          {onOpenEntrance && (
+            <button
+              onClick={onOpenEntrance}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/90 rounded-xl transition-colors shadow-2xs"
+              title="Return to 3D Starting Interface"
+            >
+              <Compass className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="hidden sm:inline">3D Entrance</span>
+            </button>
+          )}
 
           {/* Login Portal Trigger Button */}
           <button

@@ -104,7 +104,7 @@ export const Home3DViewer: React.FC<Home3DViewerProps> = ({
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.1;
     rendererRef.current = renderer;
@@ -754,12 +754,15 @@ export const Home3DViewer: React.FC<Home3DViewerProps> = ({
     // ANIMATION LOOP
     // ----------------------------------------------------
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    let lastTime = performance.now();
+    const startTime = performance.now();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-      const elapsedTime = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = (now - lastTime) / 1000;
+      lastTime = now;
+      const elapsedTime = (now - startTime) / 1000;
 
       // Smooth camera interpolation
       camera.position.lerp(targetCamPos.current, 0.05);
