@@ -194,7 +194,7 @@ export const TelemetryGauges: React.FC<TelemetryGaugesProps> = ({ room, history 
       {/* Spatial mmWave Radar & Load-Cell Occupancy Telemetry (From the PDF hardware breakdown!) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* HLK-LD2410 mmWave Radar Polar Scope */}
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm">
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm overflow-hidden">
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
@@ -217,14 +217,14 @@ export const TelemetryGauges: React.FC<TelemetryGaugesProps> = ({ room, history 
             </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-5">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
             {/* Visual Polar Radar Screen */}
-            <div className="w-44 h-28 bg-slate-900 rounded-xl relative overflow-hidden flex items-end justify-center p-1 shrink-0 border border-slate-800 shadow-inner">
+            <div className="w-36 h-28 bg-slate-900 rounded-xl relative overflow-hidden flex items-end justify-center p-1 shrink-0 border border-slate-800 shadow-inner">
               {/* Radar rings */}
               <div className="absolute inset-x-0 bottom-0 top-0 pointer-events-none flex items-end justify-center">
-                <div className="w-36 h-36 rounded-full border border-emerald-500/20 translate-y-18" />
-                <div className="absolute w-24 h-24 rounded-full border border-emerald-500/30 translate-y-12" />
-                <div className="absolute w-12 h-12 rounded-full border border-emerald-500/40 translate-y-6" />
+                <div className="w-32 h-32 rounded-full border border-emerald-500/20 translate-y-16" />
+                <div className="absolute w-20 h-20 rounded-full border border-emerald-500/30 translate-y-10" />
+                <div className="absolute w-10 h-10 rounded-full border border-emerald-500/40 translate-y-5" />
                 {/* 60 degree field of view cones */}
                 <div className="absolute w-full h-full border-t border-emerald-500/10" style={{ transform: 'rotate(-30deg)' }} />
                 <div className="absolute w-full h-full border-t border-emerald-500/10" style={{ transform: 'rotate(30deg)' }} />
@@ -245,7 +245,7 @@ export const TelemetryGauges: React.FC<TelemetryGaugesProps> = ({ room, history 
               )}
 
               <div className="absolute top-2 left-2 text-[9px] font-mono text-emerald-400/80">
-                SCAN: 24GHz FMCW
+                SCAN: 24GHz
               </div>
               <div className="absolute top-2 right-2 text-[9px] font-mono text-emerald-400/80">
                 R: 6.0m
@@ -253,28 +253,36 @@ export const TelemetryGauges: React.FC<TelemetryGaugesProps> = ({ room, history 
             </div>
 
             {/* Radar telemetry details */}
-            <div className="flex-1 w-full space-y-2 text-xs">
-              <div className="flex justify-between items-center py-1 border-b border-slate-100">
-                <span className="text-slate-500">Radial Distance:</span>
+            <div className="flex-1 w-full min-w-0 space-y-1.5 text-xs">
+              <div className="flex justify-between items-center py-1 border-b border-slate-100 gap-2">
+                <span className="text-slate-500 text-[11px] whitespace-nowrap">Radial Distance:</span>
                 <span className="font-mono font-semibold text-slate-800 tabular-nums">
                   {room.occupancy ? `${mmWaveDistance.toFixed(2)} m` : '—'}
                 </span>
               </div>
-              <div className="flex justify-between items-center py-1 border-b border-slate-100">
-                <span className="text-slate-500">Azimuth Angle:</span>
+              <div className="flex justify-between items-center py-1 border-b border-slate-100 gap-2">
+                <span className="text-slate-500 text-[11px] whitespace-nowrap">Azimuth Angle:</span>
                 <span className="font-mono font-semibold text-slate-800 tabular-nums">
                   {room.occupancy ? `${mmWaveAzimuth > 0 ? '+' : ''}${mmWaveAzimuth}°` : '—'}
                 </span>
               </div>
-              <div className="flex justify-between items-center py-1 border-b border-slate-100">
-                <span className="text-slate-500">Micro-Motion Energy:</span>
-                <span className="font-mono font-semibold text-emerald-600 tabular-nums">
-                  {microMotionEnergy}% (Breathing/Fingers)
-                </span>
+              <div className="py-1 border-b border-slate-100">
+                <div className="flex justify-between items-center gap-2">
+                  <span className="text-slate-500 text-[11px] whitespace-nowrap">Micro-Motion Energy:</span>
+                  <span className="font-mono font-bold text-emerald-600 tabular-nums">
+                    {microMotionEnergy}%
+                  </span>
+                </div>
+                <div className="mt-1 flex items-center justify-between text-[10px] text-emerald-700 font-mono">
+                  <span className="text-slate-400">Vital Voxel:</span>
+                  <span className="px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-200 font-semibold whitespace-nowrap">
+                    Breathing / Fingers
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-500 pt-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>100% On-Device Privacy Guaranteed</span>
+              <div className="flex items-center gap-1.5 text-[10px] text-slate-500 pt-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span className="truncate">100% On-Device Privacy Guaranteed</span>
               </div>
             </div>
           </div>
